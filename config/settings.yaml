@@ -1,0 +1,14 @@
+# src/config/settings.yaml
+spark:
+  app_name: "Relatorio Pedidos Recusados Legitimos"
+
+paths:
+  pagamentos: "../data/input/dataset-json-pagamentos/data/pagamentos"
+  pedidos: "../data/input/datasets-csv-pedidos/data/pedidos/"
+  output: "../data/output/pedidos_por_cliente"
+
+file_options:
+  pedidos_csv:
+    compression: "gzip"
+    header: True
+    sep: ";"
