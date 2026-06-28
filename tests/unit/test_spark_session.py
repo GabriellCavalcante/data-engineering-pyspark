@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 
 from dataeng_pyspark_data_pipeline.session.spark_session import SparkSessionManager
 
+
 class TestSparkSessionManager:
 
     def test_retorna_instancia_de_spark_session(self, spark):

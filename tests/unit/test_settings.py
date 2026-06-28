@@ -4,6 +4,7 @@ import yaml
 
 from dataeng_pyspark_data_pipeline.config.settings import carregar_config
 
+
 @pytest.fixture
 def arquivo_config_valido(tmp_path):
     """Cria um settings.yaml mínimo e válido em diretório temporário."""

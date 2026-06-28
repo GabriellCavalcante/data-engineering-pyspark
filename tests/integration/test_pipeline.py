@@ -5,8 +5,12 @@ from decimal import Decimal
 from unittest.mock import MagicMock
 
 from pyspark.sql.types import (
-    BooleanType, DecimalType, LongType, StringType,
-    StructField, StructType,
+    BooleanType,
+    DecimalType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
 )
 
 from dataeng_pyspark_data_pipeline.io_utils.data_handler import DataHandler
@@ -14,33 +18,49 @@ from dataeng_pyspark_data_pipeline.pipeline.pipeline import Pipeline
 from dataeng_pyspark_data_pipeline.processing.transformations import Transformation
 
 
-SCHEMA_PEDIDOS = StructType([
-    StructField("id_pedido", StringType(), True),
-    StructField("produto", StringType(), True),
-    StructField("valor_unitario", DecimalType(18, 2), True),
-    StructField("quantidade", LongType(), True),
-    StructField("data_criacao", StringType(), True),
-    StructField("uf", StringType(), True),
-    StructField("id_cliente", LongType(), True),
-])
+SCHEMA_PEDIDOS = StructType(
+    [
+        StructField("id_pedido", StringType(), True),
+        StructField("produto", StringType(), True),
+        StructField("valor_unitario", DecimalType(18, 2), True),
+        StructField("quantidade", LongType(), True),
+        StructField("data_criacao", StringType(), True),
+        StructField("uf", StringType(), True),
+        StructField("id_cliente", LongType(), True),
+    ]
+)
 
-SCHEMA_PAGAMENTOS = StructType([
-    StructField("id_pedido", StringType(), True),
-    StructField("forma_pagamento", StringType(), True),
-    StructField("valor_pagamento", DecimalType(18, 2), True),
-    StructField("status", BooleanType(), True),
-    StructField("data_processamento", StringType(), True),
-    StructField("avaliacao_fraude", StructType([
-        StructField("fraude", BooleanType(), True),
-        StructField("score", DecimalType(5, 4), True),
-    ]), True),
-])
+SCHEMA_PAGAMENTOS = StructType(
+    [
+        StructField("id_pedido", StringType(), True),
+        StructField("forma_pagamento", StringType(), True),
+        StructField("valor_pagamento", DecimalType(18, 2), True),
+        StructField("status", BooleanType(), True),
+        StructField("data_processamento", StringType(), True),
+        StructField(
+            "avaliacao_fraude",
+            StructType(
+                [
+                    StructField("fraude", BooleanType(), True),
+                    StructField("score", DecimalType(5, 4), True),
+                ]
+            ),
+            True,
+        ),
+    ]
+)
 
 
 def config_teste(output="/mock/output/"):
     return {
-        "paths": {"pagamentos": "/mock/pagamentos/", "pedidos": "/mock/pedidos/", "output": output},
-        "file_options": {"pedidos_csv": {"compression": "gzip", "header": True, "sep": ";"}},
+        "paths": {
+            "pagamentos": "/mock/pagamentos/",
+            "pedidos": "/mock/pedidos/",
+            "output": output,
+        },
+        "file_options": {
+            "pedidos_csv": {"compression": "gzip", "header": True, "sep": ";"}
+        },
     }
 
 
@@ -60,7 +80,10 @@ class TestPipelineOrquestracao:
         handler = _handler_mock(pedidos, pagamentos)
         Pipeline(handler, Transformation()).run(config_teste())
         handler.load_pedidos.assert_called_once_with(
-            path="/mock/pedidos/", compression="gzip", header=True, sep=";",
+            path="/mock/pedidos/",
+            compression="gzip",
+            header=True,
+            sep=";",
         )
         handler.load_pagamentos.assert_called_once_with(path="/mock/pagamentos/")
 
@@ -82,12 +105,22 @@ class TestPipelineEndToEnd:
             "p2;PC;300.00;1;2024-01-01T10:00:00;RJ;2",
         ]
         pagamentos = [
-            {"id_pedido": "p1", "forma_pagamento": "pix", "valor_pagamento": 250.0,
-             "status": False, "data_processamento": "2025-01-01",
-             "avaliacao_fraude": {"fraude": False, "score": 0.1}},
-            {"id_pedido": "p2", "forma_pagamento": "boleto", "valor_pagamento": 300.0,
-             "status": False, "data_processamento": "2024-01-01",
-             "avaliacao_fraude": {"fraude": False, "score": 0.2}},
+            {
+                "id_pedido": "p1",
+                "forma_pagamento": "pix",
+                "valor_pagamento": 250.0,
+                "status": False,
+                "data_processamento": "2025-01-01",
+                "avaliacao_fraude": {"fraude": False, "score": 0.1},
+            },
+            {
+                "id_pedido": "p2",
+                "forma_pagamento": "boleto",
+                "valor_pagamento": 300.0,
+                "status": False,
+                "data_processamento": "2024-01-01",
+                "avaliacao_fraude": {"fraude": False, "score": 0.2},
+            },
         ]
         pedidos_path = tmp_path / "pedidos.csv.gz"
         pagamentos_path = tmp_path / "pagamentos.json.gz"

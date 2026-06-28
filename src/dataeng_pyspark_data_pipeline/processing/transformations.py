@@ -11,12 +11,18 @@ logger = logging.getLogger(__name__)
 class Transformation:
     """Classe que contém as transformações e regras de negócio da aplicação."""
 
-    def gerar_relatorio(self, pedidos_df: DataFrame, pagamentos_df: DataFrame) -> DataFrame:
+    def gerar_relatorio(
+        self, pedidos_df: DataFrame, pagamentos_df: DataFrame
+    ) -> DataFrame:
         """Gera o relatório de pedidos 2025 com pagamento recusado e legítimo."""
         try:
             logger.info("Aplicando regras de negócio do relatório.")
 
-            data_column = "data_criacao" if "data_criacao" in pedidos_df.columns else "data_pedido"
+            data_column = (
+                "data_criacao"
+                if "data_criacao" in pedidos_df.columns
+                else "data_pedido"
+            )
 
             pedidos = (
                 pedidos_df.withColumn(
@@ -37,18 +43,24 @@ class Transformation:
                     ),
                 )
                 .withColumn("uf", F.upper(F.trim("uf")))
-                .filter(F.col("id_pedido").isNotNull() & F.col("data_pedido").isNotNull())
+                .filter(
+                    F.col("id_pedido").isNotNull() & F.col("data_pedido").isNotNull()
+                )
                 .filter(
                     (F.col("data_pedido") >= F.lit("2025-01-01").cast("timestamp"))
                     & (F.col("data_pedido") < F.lit("2026-01-01").cast("timestamp"))
                 )
                 .withColumn(
                     "valor_item",
-                    (F.col("valor_unitario") * F.col("quantidade")).cast(DecimalType(20, 2)),
+                    (F.col("valor_unitario") * F.col("quantidade")).cast(
+                        DecimalType(20, 2)
+                    ),
                 )
                 .groupBy("id_pedido", "uf", "data_pedido")
                 .agg(
-                    F.sum("valor_item").cast(DecimalType(20, 2)).alias("valor_total_pedido")
+                    F.sum("valor_item")
+                    .cast(DecimalType(20, 2))
+                    .alias("valor_total_pedido")
                 )
             )
 

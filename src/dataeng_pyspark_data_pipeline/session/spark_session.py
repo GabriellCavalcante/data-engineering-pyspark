@@ -15,13 +15,14 @@ class SparkSessionManager:
         :param app_name: Nome da aplicação Spark.
         :return: Instância da SparkSession.
         """
-        return (SparkSession
-                .builder.appName(app_name)
-                .master("local[1]")
-                .config("spark.ui.enabled", "false")
-                .config("spark.sql.shuffle.partitions", "1")
-                .config("spark.default.parallelism", "1")
-                .config("spark.driver.host", "127.0.0.1")
-                .config("spark.driver.bindAddress", "127.0.0.1")
-                .config("spark.hadoop.fs.defaultFS", "file:///")
-                .getOrCreate())
+        return (
+            SparkSession.builder.appName(app_name)
+            .master("local[1]")
+            .config("spark.ui.enabled", "false")
+            .config("spark.sql.shuffle.partitions", "1")
+            .config("spark.default.parallelism", "1")
+            .config("spark.driver.host", "127.0.0.1")
+            .config("spark.driver.bindAddress", "127.0.0.1")
+            .config("spark.hadoop.fs.defaultFS", "file:///")
+            .getOrCreate()
+        )

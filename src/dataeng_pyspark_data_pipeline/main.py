@@ -10,6 +10,7 @@ from dataeng_pyspark_data_pipeline.pipeline.pipeline import Pipeline
 from dataeng_pyspark_data_pipeline.processing.transformations import Transformation
 from dataeng_pyspark_data_pipeline.session.spark_session import SparkSessionManager
 
+
 def find_project_root() -> Path:
     """
     Encontra a raiz do projeto procurando pelo arquivo config/settings.yaml.
