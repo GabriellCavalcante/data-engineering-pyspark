@@ -2,8 +2,7 @@
 import pytest
 import yaml
 
-from config.settings import carregar_config
-
+from dataeng_pyspark_data_pipeline.config.settings import carregar_config
 
 @pytest.fixture
 def arquivo_config_valido(tmp_path):

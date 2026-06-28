@@ -1,15 +1,14 @@
-# src/main.py
-from config.settings import carregar_config
-from session.spark_session import SparkSessionManager
-from io_utils.data_handler import DataHandler
-from pipeline.pipeline import Pipeline
-from processing.transformations import Transformation
 import logging
-from datetime import datetime
 import os
+from datetime import datetime
+
+from dataeng_pyspark_data_pipeline.config.settings import carregar_config
+from dataeng_pyspark_data_pipeline.io_utils.data_handler import DataHandler
+from dataeng_pyspark_data_pipeline.pipeline.pipeline import Pipeline
+from dataeng_pyspark_data_pipeline.processing.transformations import Transformation
+from dataeng_pyspark_data_pipeline.session.spark_session import SparkSessionManager
 
 
-# Crie a configuração do logging
 def configurar_logging():
     """Configura o logging para todo o projeto."""
 
@@ -27,7 +26,7 @@ def configurar_logging():
             logging.FileHandler(caminho_log, mode="a", encoding="utf-8"),
             logging.StreamHandler(),
         ],
-        force=True,  # força substituir handlers já existentes
+        force=True,
     )
 
     logging.info("Logging configurado.")
@@ -35,12 +34,15 @@ def configurar_logging():
 
 
 def main():
+    configurar_logging()
+
     logger = logging.getLogger(__name__)
 
     config = carregar_config()
     app_name = config["spark"]["app_name"]
 
-    spark = None  # Inicializa como None para segurança no finally
+    spark = None
+
     try:
         spark = SparkSessionManager.get_spark_session(app_name=app_name)
 
@@ -49,11 +51,11 @@ def main():
 
         pipeline = Pipeline(data_handler, transformer)
         pipeline.run(config=config)
+
         logger.info("[main] relatório executado com sucesso!!!")
 
     except Exception as e:
-        logging.error(f"FALHA CRÍTICA NO PIPELINE: {e}")
-        # Aqui poderíamos adicionar envio de notificação (Slack, Email, PagerDuty)
+        logging.error("FALHA CRÍTICA NO PIPELINE: %s", e)
 
     finally:
         if spark:
@@ -62,5 +64,4 @@ def main():
 
 
 if __name__ == "__main__":
-    configurar_logging()
     main()

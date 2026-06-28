@@ -9,9 +9,9 @@ from pyspark.sql.types import (
     StructField, StructType,
 )
 
-from io_utils.data_handler import DataHandler
-from pipeline.pipeline import Pipeline
-from processing.transformations import Transformation
+from dataeng_pyspark_data_pipeline.io_utils.data_handler import DataHandler
+from dataeng_pyspark_data_pipeline.pipeline.pipeline import Pipeline
+from dataeng_pyspark_data_pipeline.processing.transformations import Transformation
 
 
 SCHEMA_PEDIDOS = StructType([

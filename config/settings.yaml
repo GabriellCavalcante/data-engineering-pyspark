@@ -3,9 +3,9 @@ spark:
   app_name: "Relatório de pedidos de venda"
 
 paths:
-  pagamentos: "../data/input/dataset-json-pagamentos/data/pagamentos"
-  pedidos: "../data/input/datasets-csv-pedidos/data/pedidos/"
-  output: "../data/output/pedidos_por_cliente"
+  pagamentos: "../../data/input/dataset-json-pagamentos/data/pagamentos"
+  pedidos: "../../data/input/datasets-csv-pedidos/data/pedidos/"
+  output: "../../data/output/pedidos_por_cliente"
 
 file_options:
   pedidos_csv:

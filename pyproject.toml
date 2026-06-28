@@ -1,14 +1,15 @@
-# pyproject.toml
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "dataeng_pyspark_data_pipeline"
 version = "0.1.0"
 authors = [
-  {name="Fernanda Vitoria de Oliveira Souza", email="fernandav.souza@outlook.com"},
-  { name="Gabriell Cavalcante", email="cavalcante.eng91@gmail.com"},
+  { name = "Fernanda Vitoria de Oliveira Souza", email = "fernandav.souza@outlook.com" },
+  { name = "Gabriell Cavalcante", email = "cavalcante.eng91@gmail.com" },
+  { name = "Gabriel Pereira Viana", email = "Vianagabriel427@gmail.com" },
+  { name = "Thiago Buttler", email = "thiagobuttler@outlook.com" },
 ]
 description = "Um pipeline de dados com PySpark estruturado com boas práticas de engenharia de software."
 readme = "README.md"
@@ -20,18 +21,19 @@ classifiers = [
 ]
 dependencies = [
     "pyspark==3.5.8",
-    "pyyaml==6.0.3"
+    "pyyaml==6.0.3",
 ]
 
 [project.optional-dependencies]
 dev = [
     "ruff==0.12.9",
     "black==25.1.0",
-    "build==1.3.0"
+    "build==1.3.0",
+    "pytest",
 ]
 
 [project.scripts]
-run-data-pipeline = "main:main"
+run-data-pipeline = "dataeng_pyspark_data_pipeline.main:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -45,4 +47,3 @@ markers = [
     "integration: Testes de integração (orquestração entre componentes)",
 ]
 addopts = "-v"
-

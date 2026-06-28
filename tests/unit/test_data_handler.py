@@ -7,8 +7,7 @@ from decimal import Decimal
 import pytest
 from pyspark.sql.types import BooleanType, DecimalType, LongType, StringType, StructField, StructType
 
-from io_utils.data_handler import DataHandler
-
+from dataeng_pyspark_data_pipeline.io_utils.data_handler import DataHandler
 
 @pytest.fixture
 def arquivo_pagamentos_gz(tmp_path):

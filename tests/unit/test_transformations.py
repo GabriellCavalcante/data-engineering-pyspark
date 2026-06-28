@@ -6,8 +6,7 @@ from pyspark.sql.types import (
     StructField, StructType,
 )
 
-from processing.transformations import Transformation
-
+from dataeng_pyspark_data_pipeline.processing.transformations import Transformation
 
 SCHEMA_PEDIDOS = StructType([
     StructField("id_pedido", StringType(), True),
