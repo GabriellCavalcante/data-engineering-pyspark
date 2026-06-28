@@ -15,4 +15,4 @@ class SparkSessionManager:
         :param app_name: Nome da aplicação Spark.
         :return: Instância da SparkSession.
         """
-        return SparkSession.builder.appName(app_name).master("local[*]").getOrCreate()
+        return SparkSession.builder.appName(app_name).getOrCreate()

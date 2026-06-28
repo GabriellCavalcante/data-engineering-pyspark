@@ -3,9 +3,8 @@ import logging
 from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
 from pyspark.sql.types import DecimalType
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-logger = logging.getLogger(__name__)
 
+logger = logging.getLogger(__name__)
 
 class Transformation:
     """Classe que contém as transformações e regras de negócio da aplicação."""

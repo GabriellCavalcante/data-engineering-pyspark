@@ -1,2 +1,17 @@
-include requirements.txt
 include README.md
+include requirements.txt
+include config/settings.yaml
+
+recursive-include tests *.py
+recursive-include data/input *
+
+recursive-exclude data/output *
+recursive-exclude dist *
+recursive-exclude build *
+recursive-exclude .venv *
+recursive-exclude __pycache__ *
+recursive-exclude .pytest_cache *
+recursive-exclude .ruff_cache *
+recursive-exclude *.egg-info *
+global-exclude *.py[cod]
+global-exclude *.log
