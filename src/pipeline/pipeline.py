@@ -18,7 +18,7 @@ class Pipeline:
 
     def run(self, config):
         """
-        Executa o pipeline completo: carga, transformação, e salvamento.
+        Executa o pipeline completo: carga, transformação, e grava no destino.
         """
         logger.info("Pipeline iniciado...")
 

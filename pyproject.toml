@@ -7,7 +7,8 @@ build-backend = "setuptools.build_meta"
 name = "dataeng_pyspark_data_pipeline"
 version = "0.1.0"
 authors = [
-  { name="infobarbosa", email="infobarbosa@gmail.com" },
+  {name="Fernanda Vitoria de Oliveira Souza", email="fernandav.souza@outlook.com"},
+  { name="Gabriell Cavalcante", email="cavalcante.eng91@gmail.com"},
 ]
 description = "Um pipeline de dados com PySpark estruturado com boas práticas de engenharia de software."
 readme = "README.md"
@@ -36,7 +37,6 @@ run-data-pipeline = "main:main"
 package-dir = {"" = "src"}
 packages = {find = {where = ["src"]}}
 
-# pyproject.toml (adicione ao final)
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]

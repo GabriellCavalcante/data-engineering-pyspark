@@ -1,6 +1,6 @@
 # src/config/settings.yaml
 spark:
-  app_name: "Relatorio Pedidos Recusados Legitimos"
+  app_name: "Relatório de pedidos de venda"
 
 paths:
   pagamentos: "../data/input/dataset-json-pagamentos/data/pagamentos"

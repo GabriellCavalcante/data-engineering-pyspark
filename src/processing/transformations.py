@@ -26,9 +26,11 @@ class Transformation:
                 .withColumn("valor_item", (F.col("valor_unitario") * F.col("quantidade")).cast(DecimalType(20, 2)))
                 .groupBy("id_pedido", "uf", "data_pedido")
                 .agg(F.sum("valor_item").cast(DecimalType(20, 2)).alias("valor_total_pedido")))
+
             pagamentos = (pagamentos_df.filter(F.col("id_pedido").isNotNull())
                 .filter((F.col("status") == F.lit(False)) & (F.col("avaliacao_fraude.fraude") == F.lit(False)))
                 .select("id_pedido", F.upper(F.trim("forma_pagamento")).alias("forma_pagamento")))
+
             return (pedidos.join(pagamentos, on="id_pedido", how="inner")
                 .select("id_pedido", "uf", "forma_pagamento", "valor_total_pedido", "data_pedido")
                 .orderBy("uf", "forma_pagamento", "data_pedido"))

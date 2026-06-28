@@ -14,7 +14,7 @@ def configurar_logging():
     """Configura o logging para todo o projeto."""
 
     data_execucao = datetime.now().strftime("%Y%m%d")
-    caminho_log = os.path.abspath(f"dataeng-pyspark-poo-{data_execucao}.log")
+    caminho_log = os.path.abspath(f"dataeng-pyspark-{data_execucao}.log")
 
     with open(caminho_log, "w", encoding="utf-8"):
         pass
