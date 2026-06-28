@@ -693,3 +693,4 @@ python -m build
 - Gabriell Cavalcante
 - Gabriel Pereira Viana
 - Thiago Buttler
+- Rafael Leal
