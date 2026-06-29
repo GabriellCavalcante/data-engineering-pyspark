@@ -4,13 +4,6 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from dataeng_pyspark_data_pipeline.config.settings import carregar_config
-from dataeng_pyspark_data_pipeline.io_utils.data_handler import DataHandler
-from dataeng_pyspark_data_pipeline.pipeline.pipeline import Pipeline
-from dataeng_pyspark_data_pipeline.processing.transformations import Transformation
-from dataeng_pyspark_data_pipeline.session.spark_session import SparkSessionManager
-
-
 def find_project_root() -> Path:
     """
     Encontra a raiz do projeto procurando pelo arquivo config/settings.yaml.
@@ -40,6 +33,12 @@ if str(SRC_PATH) not in sys.path:
     sys.path.insert(0, str(SRC_PATH))
 
 os.chdir(PROJECT_ROOT)
+
+from dataeng_pyspark_data_pipeline.config.settings import carregar_config
+from dataeng_pyspark_data_pipeline.io_utils.data_handler import DataHandler
+from dataeng_pyspark_data_pipeline.pipeline.pipeline import Pipeline
+from dataeng_pyspark_data_pipeline.processing.transformations import Transformation
+from dataeng_pyspark_data_pipeline.session.spark_session import SparkSessionManager
 
 
 def configurar_logging() -> None:
